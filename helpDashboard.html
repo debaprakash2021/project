@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabourSahayata - Comprehensive Labour Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .dropdown-menu {
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        #mobileMenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        #mobileMenu.show {
+            max-height: 500px;
+        }
+
+        .rotate-180 {
+    transform: rotate(180deg);
+}
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 p-4 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex justify-between w-full md:w-auto items-center">
+                <a href="#" class="text-2xl font-bold hover:text-yellow-300">Labour Portal</a>
+                <button class="md:hidden text-2xl" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <ul class="hidden md:flex space-x-6 mt-4 md:mt-0" id="menu-items">
+                <li><a href="homepage.php" class="hover:underline hover:text-yellow-300">🏠Home</a></li>
+                <li><a href="policies.html" class="hover:underline hover:text-yellow-300">⚖Policies</a></li>
+                <li><a href="showsNews.html" class="hover:underline hover:text-yellow-300">📰News</a></li>
+                <li><a href="helpDashboard.html" class="hover:underline hover:text-yellow-300">☎Help Dashboard</a></li>
+                <li><a href="filecomplain.html" class="hover:underline hover:text-yellow-300">📝File a Complaint</a></li>
+
+            </ul>
+            <!-- <div class="hidden md:block mt-4 md:mt-0" id="auth-buttons">
+                <button class="bg-white text-blue-600 px-4 py-2 rounded-md mr-2 hover:bg-blue-100 transition"><a href="userLogin.html">User Login</a></button>
+                <button class="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100 transition"><a href="adminLogin.html">Admin Login</a></button>
+            </div> -->
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="gradient-bg text-white rounded-xl p-8 mb-8 shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Empowering Workers & Employers</h1>
+            <p class="text-lg mb-6 max-w-2xl">Access comprehensive labour laws, employment guidelines and efficient complaint resolution system all in one platform</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="filecomplain.html"><button id="complaintBtn" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 flex items-center">
+                    <i class="fas fa-plus-circle mr-2"></i>File Complaint
+                </button></a>
+                <a href="forms.html"><button class="bg-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/30 flex items-center">
+                    <i class="fas fa-download mr-2"></i>Download Forms
+                </button></a>
+            </div>
+        </div>
+
+        <!-- 3-Column Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <!-- Labour Laws Card -->
+            <div class="card-hover bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-blue-600 text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-gavel mr-2"></i> Labour Laws
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Wage Protection Laws</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Working Hours Regulations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Social Security Schemes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Health & Safety Standards</span>
+                        </li>
+                    </ul>
+                    <a href="policies.html"><button class="mt-4 w-full bg-blue-100 text-blue-600 py-2 rounded-lg hover:bg-blue-200 flex items-center justify-center">
+                        Explore All Laws <i class="fas fa-arrow-right ml-2"></i>
+                    </button></a>
+                </div>
+            </div>
+            
+            <!-- Empowerment Card -->
+            <div class="card-hover bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-green-600 text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-briefcase mr-2"></i> Empowerment
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-file-contract text-blue-500 mt-1 mr-2"></i>
+                            <span>Contract Templates</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-hard-hat text-yellow-500 mt-1 mr-2"></i>
+                            <span>Safety Guidelines</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-rupee-sign text-green-500 mt-1 mr-2"></i>
+                            <span>Wage Calculators(Coming Soon)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-graduate text-purple-500 mt-1 mr-2"></i>
+                            <span>Awareness Programs(Coming Soon)</span>
+                        </li>
+                    </ul>
+                    <a href="empowerment.html"><button class="mt-4 w-full bg-green-100 text-green-600 py-2 rounded-lg hover:bg-green-200 flex items-center justify-center">
+                        Empowerment Tips <i class="fas fa-tools ml-2"></i>
+                    </button></a>
+                </div>
+            </div>
+            
+            <!-- Complaints Card -->
+            <div class="card-hover bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-red-600 text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Complaints
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-plus-circle text-red-500 mt-1 mr-2"></i>
+                            <span>File New Complaint</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-search text-blue-500 mt-1 mr-2"></i>
+                            <span>Track Complaint Status</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-history text-orange-500 mt-1 mr-2"></i>
+                            <span>Check Resolution Timeline</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-green-500 mt-1 mr-2"></i>
+                            <span>24x7 Helpline: 1800-123-456</span>
+                        </li>
+                    </ul>
+                    <a href="filecomplain.html"><button class="mt-4 w-full bg-red-100 text-red-600 py-2 rounded-lg hover:bg-red-200 flex items-center justify-center">
+                        Complaint Portal <i class="fas fa-external-link-alt ml-2"></i>
+                    </button></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Updates Section -->
+        <!-- <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center border-b pb-2">
+                <i class="fas fa-bell text-yellow-500 mr-2"></i> Recent Updates
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg border-b">
+                    <div class="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">New Wage Code Notification</h3>
+                        <p class="text-sm text-gray-600">Effective from 1st April 2024</p>
+                        <p class="text-xs text-gray-500 mt-1">Updated on: 15 March 2024</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg border-b">
+                    <div class="bg-green-100 text-green-600 p-2 rounded-full mr-3">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">EPF Contribution Changes</h3>
+                        <p class="text-sm text-gray-600">Updated rates for 2024-25</p>
+                        <p class="text-xs text-gray-500 mt-1">Updated on: 1 March 2024</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg border-b">
+                    <div class="bg-purple-100 text-purple-600 p-2 rounded-full mr-3">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">New Labour Welfare Schemes</h3>
+                        <p class="text-sm text-gray-600">5 new schemes announced</p>
+                        <p class="text-xs text-gray-500 mt-1">Updated on: 25 Feb 2024</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg border-b">
+                    <div class="bg-red-100 text-red-600 p-2 rounded-full mr-3">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Important Safety Alert</h3>
+                        <p class="text-sm text-gray-600">Revised construction safety norms</p>
+                        <p class="text-xs text-gray-500 mt-1">Updated on: 20 Feb 2024</p>
+                    </div>
+                </div>
+            </div>
+            <button class="mt-4 text-blue-600 hover:text-blue-800 text-sm font-medium">
+                View All Updates <i class="fas fa-arrow-right ml-1"></i>
+            </button>
+        </div> -->
+
+        <!-- Quick Links -->
+        <!-- <h2 class="text-xl font-bold mb-4 flex items-center">
+            <i class="fas fa-link text-blue-500 mr-2"></i> Quick Access
+        </h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <a href="#" class="bg-gray-100 hover:bg-blue-100 p-4 rounded-lg transition flex flex-col items-center">
+                <i class="fas fa-file-pdf text-red-500 text-3xl mb-2"></i>
+                <p class="font-medium">Download Forms</p>
+                <p class="text-xs text-gray-500 mt-1">All official forms</p>
+            </a>
+            <a href="#" class="bg-gray-100 hover:bg-blue-100 p-4 rounded-lg transition flex flex-col items-center">
+                <i class="fas fa-video text-blue-500 text-3xl mb-2"></i>
+                <p class="font-medium">Training Videos</p>
+                <p class="text-xs text-gray-500 mt-1">Learn labour rights</p>
+            </a>
+            <a href="#" class="bg-gray-100 hover:bg-blue-100 p-4 rounded-lg transition flex flex-col items-center">
+                <i class="fas fa-map-marker-alt text-green-500 text-3xl mb-2"></i>
+                <p class="font-medium">Labour Offices</p>
+                <p class="text-xs text-gray-500 mt-1">Nearby locations</p>
+            </a>
+            <a href="#" class="bg-gray-100 hover:bg-blue-100 p-4 rounded-lg transition flex flex-col items-center">
+                <i class="fas fa-question-circle text-purple-500 text-3xl mb-2"></i>
+                <p class="font-medium">FAQ</p>
+                <p class="text-xs text-gray-500 mt-1">Common questions</p>
+            </a>
+        </div> -->
+        <!-- FAQ Section -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-6 flex items-center border-b pb-2">
+        <i class="fas fa-question-circle text-blue-500 mr-2"></i> Frequently Asked Questions
+    </h2>
+    
+    <div class="space-y-6">
+        <!-- Question 1 -->
+        <div class="border border-blue-100 rounded-lg p-4 bg-blue-50">
+            <h3 class="font-medium text-blue-800 mb-2">What is the minimum wage for unskilled workers?</h3>
+            <p class="text-gray-700">The minimum wage varies by state and sector. As of 2024, the national floor level minimum wage is ₹178 per day, but most states have higher rates (typically ₹250-₹400 for unskilled workers). Check your state's labour department website for exact rates.</p>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="border border-blue-100 rounded-lg p-4 bg-blue-50">
+            <h3 class="font-medium text-blue-800 mb-2">How many hours can I be made to work in a day?</h3>
+            <p class="text-gray-700 mb-2">As per the Factories Act, the maximum working hours are:</p>
+            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                <li>9 hours per day (including 1 hour break)</li>
+                <li>48 hours per week</li>
+                <li>Overtime must be paid at double the normal wage rate</li>
+            </ul>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="border border-blue-100 rounded-lg p-4 bg-blue-50">
+            <h3 class="font-medium text-blue-800 mb-2">What should I do if my employer doesn't pay my wages?</h3>
+            <p class="text-gray-700 mb-2">Follow these steps:</p>
+            <ol class="list-decimal pl-5 space-y-1 text-gray-700">
+                <li>First try talking to your employer or supervisor</li>
+                <li>If unpaid for over 2 months, file a complaint at the local Labour Commissioner's office</li>
+                <li>You can also file online through this portal's complaint section</li>
+                <li>Keep records of your work days and any payment receipts</li>
+            </ol>
+            <p class="mt-2 text-sm text-blue-600"><i class="fas fa-phone-alt mr-1"></i> Call the wage complaint helpline: 1800-345-678</p>
+        </div>
+        
+        <!-- Question 4 -->
+        <div class="border border-blue-100 rounded-lg p-4 bg-blue-50">
+            <h3 class="font-medium text-blue-800 mb-2">Am I entitled to paid leave?</h3>
+            <p class="text-gray-700 mb-2">Yes, most workers are entitled to:</p>
+            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                <li>1 day of paid leave for every 20 days worked (after 240 days of service)</li>
+                <li>12 days of casual leave per year</li>
+                <li>15 days of sick leave with medical certificate</li>
+                <li>Maternity leave of 26 weeks for women workers</li>
+            </ul>
+        </div>
+        
+        <!-- Question 5 -->
+        <div class="border border-blue-100 rounded-lg p-4 bg-blue-50">
+            <h3 class="font-medium text-blue-800 mb-2">What safety equipment should my employer provide?</h3>
+            <p class="text-gray-700 mb-2">Depending on your work, employers must provide:</p>
+            <div class="grid md:grid-cols-2 gap-4 mt-2">
+                <div>
+                    <p class="font-medium text-blue-700">Construction Workers:</p>
+                    <ul class="list-disc pl-5 text-sm text-gray-700">
+                        <li>Hard hats</li>
+                        <li>Safety harnesses</li>
+                        <li>Dust masks</li>
+                        <li>Safety shoes</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-medium text-blue-700">Factory Workers:</p>
+                    <ul class="list-disc pl-5 text-sm text-gray-700">
+                        <li>Protective goggles</li>
+                        <li>Ear protection</li>
+                        <li>Gloves</li>
+                        <li>Aprons</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Question 6 -->
+        <div class="border border-blue-100 rounded-lg p-4 bg-blue-50">
+            <h3 class="font-medium text-blue-800 mb-2">How can I check my EPF balance?</h3>
+            <p class="text-gray-700 mb-2">You can check your EPF balance through:</p>
+            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                <li><strong>Missed Call:</strong> Give a missed call to 011-22901406 from your registered mobile number</li>
+                <li><strong>SMS:</strong> Send "EPFOHO UAN ENG" to 7738299899</li>
+                <li><strong>Online:</strong> Login at <a href="https://unifiedportal-mem.epfindia.gov.in" class="text-blue-600 underline">EPFO Portal</a> using your UAN</li>
+                <li><strong>App:</strong> Use the UMANG app available on Play Store/App Store</li>
+            </ul>
+        </div>
+    </div>
+    
+  
+</div>
+
+        <!-- Statistics Section -->
+        <div class="bg-blue-50 rounded-xl p-6 mb-8">
+            <h2 class="text-xl font-bold mb-6 text-center">Our Impact</h2>
+            <div class="grid md:grid-cols-4 gap-4 text-center">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="text-blue-600 text-3xl font-bold mb-2">10,000+</div>
+                    <div class="text-gray-600">Laws Documented</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="text-green-600 text-3xl font-bold mb-2">50,000+</div>
+                    <div class="text-gray-600">Complaints Resolved</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="text-yellow-600 text-3xl font-bold mb-2">1M+</div>
+                    <div class="text-gray-600">Users Empowered</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="text-red-600 text-3xl font-bold mb-2">24/7</div>
+                    <div class="text-gray-600">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-6">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">LabourSahayata</h3>
+                    <p class="text-gray-400">Comprehensive portal for labour laws, employment guidelines and grievance redressal system.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Helplines</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">1800-123-456</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">help@laboursahayata.gov.in</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">New Delhi, India</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-medium mb-2">Download Mobile App</h4>
+                        <div class="flex space-x-2">
+                            <button class="bg-black text-white px-3 py-1 rounded text-sm flex items-center">
+                                <i class="fab fa-apple mr-1"></i> App Store
+                            </button>
+                            <button class="bg-black text-white px-3 py-1 rounded text-sm flex items-center">
+                                <i class="fab fa-google-play mr-1"></i> Play Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+                <p>© 2024 LabourSahayata Portal. All rights reserved.</p>
+                <p class="mt-1">Designed and developed by National Informatics Centre</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Complaint Modal -->
+    <div id="complaintModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg w-full max-w-md mx-4">
+            <div class="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-xl font-bold">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> File New Complaint
+                </h3>
+                <button id="closeModal" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Complaint Type</label>
+                    <select class="w-full p-2 border rounded">
+                        <option>Select complaint type</option>
+                        <option>Wage Dispute</option>
+                        <option>Working Conditions</option>
+                        <option>Safety Violation</option>
+                        <option>Contract Issues</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Description</label>
+                    <textarea class="w-full p-2 border rounded" rows="3" placeholder="Describe your complaint in detail"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Upload Evidence (Optional)</label>
+                    <input type="file" class="w-full p-2 border rounded">
+                </div>
+                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                    Submit Complaint
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('show');
+            this.innerHTML = document.getElementById('mobileMenu').classList.contains('show') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Complaint Modal Handling
+        const complaintBtn = document.getElementById('complaintBtn');
+        const complaintModal = document.getElementById('complaintModal');
+        const closeModal = document.getElementById('closeModal');
+
+        complaintBtn.addEventListener('click', function() {
+            complaintModal.classList.remove('hidden');
+        });
+
+        closeModal.addEventListener('click', function() {
+            complaintModal.classList.add('hidden');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === complaintModal) {
+                complaintModal.classList.add('hidden');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form validation example
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                // Add your validation logic here
+                console.log('Form submitted');
+                e.preventDefault();
+            });
+        });
+
+        
+
+
+    </script>
+</body>
+</html>

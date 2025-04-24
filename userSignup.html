@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labour Portal - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #3b82f6, #6366f1, #8b5cf6, #d946ef);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .signup-card {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 46, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .floating-label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .input-field:focus + .floating-label,
+        .input-field:not(:placeholder-shown) + .floating-label {
+            top: 0;
+            left: 10px;
+            font-size: 12px;
+            background: rgba(59, 130, 246, 0.8);
+            padding: 0 5px;
+            border-radius: 4px;
+            color: white;
+        }
+        .password-strength {
+            height: 4px;
+            transition: width 0.3s ease;
+        }
+        .strength-0 { width: 0%; background: #ef4444; }
+        .strength-1 { width: 25%; background: #f97316; }
+        .strength-2 { width: 50%; background: #f59e0b; }
+        .strength-3 { width: 75%; background: #84cc16; }
+        .strength-4 { width: 100%; background: #10b981; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center gradient-bg p-4">
+    <div class="signup-card w-full max-w-md p-8 text-white">
+        <!-- Logo and Header -->
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-user-plus text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">Create Account</h1>
+            <p class="opacity-80">Join us today for exclusive benefits</p>
+        </div>
+
+        <!-- Signup Form -->
+        <form class="space-y-5" action="register.php" method="post">
+            <!-- Full Name -->
+            <div class="relative">
+                <input type="text" id="fullname" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " name="FullName">
+                <label for="fullname" class="floating-label">Full Name</label>
+            </div>
+
+            <!-- Email -->
+            <div class="relative">
+                <input type="email" id="email" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " name="email">
+                <label for="email" class="floating-label">Email Address</label>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="relative">
+                <input type="tel" id="mobile" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " name="number">
+                <label for="mobile" class="floating-label">Mobile Number</label>
+            </div>
+
+            <!-- Password -->
+            <div class="relative">
+                <input type="password" id="password" class="input-field w-full pl-4 pr-10 py-3 rounded-lg focus:outline-none" placeholder=" " oninput="checkPasswordStrength()" name="pass">
+                <label for="password" class="floating-label">Password</label>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+                    <i class="fas fa-eye-slash text-blue-200" id="togglePassword"></i>
+                </div>
+                <div class="password-strength-container mt-2">
+                    <div class="password-strength strength-0" id="passwordStrength"></div>
+                    <p class="text-xs mt-1" id="passwordFeedback">Weak password</p>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="relative">
+                <input type="password" id="confirmPassword" class="input-field w-full pl-4 pr-10 py-3 rounded-lg focus:outline-none" placeholder=" " name="cpass">
+                <label for="confirmPassword" class="floating-label">Confirm Password</label>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+                    <i class="fas fa-eye-slash text-blue-200" id="toggleConfirmPassword"></i>
+                </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="flex items-center">
+                <input type="checkbox" id="terms" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <label for="terms" class="ml-2 block text-sm">
+                    I agree to the <a href="#" class="text-blue-200 hover:underline">Terms & Conditions</a>
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105" name="signUp">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+
+        <!-- Already have an account? -->
+        <div class="mt-6 text-center text-sm">
+            <p class="text-white/80">Already have an account? <a href="userLogin.html" class="font-medium text-blue-200 hover:text-blue-100">Log in</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Password Visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+
+        // Password Strength Checker
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthBar = document.getElementById('passwordStrength');
+            const feedback = document.getElementById('passwordFeedback');
+
+            let strength = 0;
+
+            // Check length
+            if (password.length >= 8) strength++;
+            // Check for uppercase
+            if (/[A-Z]/.test(password)) strength++;
+            // Check for numbers
+            if (/[0-9]/.test(password)) strength++;
+            // Check for special chars
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+            // Update UI
+            strengthBar.className = `password-strength strength-${strength}`;
+            
+            // Feedback messages
+            const messages = ["Very Weak", "Weak", "Medium", "Strong", "Very Strong"];
+            feedback.textContent = messages[strength];
+            feedback.className = `text-xs mt-1 ${
+                strength < 2 ? 'text-red-400' : 
+                strength < 4 ? 'text-yellow-400' : 'text-green-400'
+            }`;
+        }
+    </script>
+</body>
+</html>

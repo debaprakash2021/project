@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Opportunities - Labour Information Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .dark .job-card {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+        .document-upload-box {
+            border: 2px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+        .document-upload-box:hover {
+            border-color: #4299e1;
+            background-color: #ebf8ff;
+        }
+        .dark .document-upload-box {
+            border-color: #4a5568;
+            background-color: #2d3748;
+        }
+        .document-upload-box.has-file {
+            border-color: #48bb78;
+            background-color: #f0fff4;
+        }
+        .dark .document-upload-box.has-file {
+            border-color: #68d391;
+            background-color: #1a4731;
+        }
+        .otp-input {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-600 dark:text-blue-400">Explore Opportunities</h1>
+        
+        <!-- Tabs Navigation -->
+        <div class="flex flex-wrap border-b border-gray-200 dark:border-gray-700 mb-8">
+            <button class="tab-btn px-4 py-2 font-medium text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400" data-tab="job-seeker">Job Seeker</button>
+            <button class="tab-btn px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" data-tab="employer">Employer</button>
+            <button class="tab-btn px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" data-tab="schemes">Government Schemes</button>
+            <button class="tab-btn px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" data-tab="training">Skill Training</button>
+        </div>
+        
+        <!-- Tab Contents -->
+        <div class="tab-content active" id="job-seeker">
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <!-- Search Filters -->
+                <div class="md:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Filter Jobs</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Job Type</label>
+                            <select class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
+                                <option>All Types</option>
+                                <option>Construction</option>
+                                <option>Agriculture</option>
+                                <option>Manufacturing</option>
+                                <option>Domestic Work</option>
+                                <option>Transportation</option>
+                                <option>Retail</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Location</label>
+                            <select class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
+                                <option>Anywhere in India</option>
+                                <option>Delhi NCR</option>
+                                <option>Mumbai</option>
+                                <option>Bangalore</option>
+                                <option>Hyderabad</option>
+                                <option>Chennai</option>
+                                <option>Kolkata</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Salary Range</label>
+                            <select class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
+                                <option>Any Salary</option>
+                                <option>₹5,000 - ₹10,000</option>
+                                <option>₹10,000 - ₹15,000</option>
+                                <option>₹15,000 - ₹20,000</option>
+                                <option>₹20,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Work Duration</label>
+                            <select class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
+                                <option>Any Duration</option>
+                                <option>Daily Wage</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Long Term</option>
+                            </select>
+                        </div>
+                        
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Job Listings -->
+                <div class="md:col-span-2">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Available Jobs</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Job Card 1 -->
+                            <div class="job-card border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition duration-300">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-bold text-lg text-gray-800 dark:text-white">Construction Worker</h4>
+                                        <p class="text-gray-600 dark:text-gray-300">ABC Constructions Pvt. Ltd.</p>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">Full-time</span>
+                                </div>
+                                <div class="mt-2 flex flex-wrap gap-2">
+                                    <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded dark:bg-blue-900 dark:text-blue-200">₹15,000/month</span>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded dark:bg-purple-900 dark:text-purple-200">Delhi</span>
+                                    <span class="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded dark:bg-yellow-900 dark:text-yellow-200">2+ years exp</span>
+                                </div>
+                                <p class="mt-3 text-gray-700 dark:text-gray-300">Looking for skilled construction workers with experience in brick laying, concrete mixing, and general construction work.</p>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <button class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium">
+                                        View Details
+                                    </button>
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded-md text-sm transition">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Job Card 2 -->
+                            <div class="job-card border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition duration-300">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-bold text-lg text-gray-800 dark:text-white">Farm Laborer</h4>
+                                        <p class="text-gray-600 dark:text-gray-300">Green Fields Agro</p>
+                                    </div>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full dark:bg-yellow-900 dark:text-yellow-200">Seasonal</span>
+                                </div>
+                                <div class="mt-2 flex flex-wrap gap-2">
+                                    <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded dark:bg-blue-900 dark:text-blue-200">₹300/day</span>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded dark:bg-purple-900 dark:text-purple-200">Punjab</span>
+                                    <span class="text-sm bg-gray-100 text-gray-800 px-2 py-1 rounded dark:bg-gray-700 dark:text-gray-200">No experience needed</span>
+                                </div>
+                                <p class="mt-3 text-gray-700 dark:text-gray-300">Need farm workers for wheat harvesting season. Accommodation and meals provided. 6 days/week.</p>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <button class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium">
+                                        View Details
+                                    </button>
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded-md text-sm transition">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Job Card 3 -->
+                            <div class="job-card border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition duration-300">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-bold text-lg text-gray-800 dark:text-white">Warehouse Packer</h4>
+                                        <p class="text-gray-600 dark:text-gray-300">QuickShip Logistics</p>
+                                    </div>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">Part-time</span>
+                                </div>
+                                <div class="mt-2 flex flex-wrap gap-2">
+                                    <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded dark:bg-blue-900 dark:text-blue-200">₹12,000/month</span>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded dark:bg-purple-900 dark:text-purple-200">Bangalore</span>
+                                    <span class="text-sm bg-gray-100 text-gray-800 px-2 py-1 rounded dark:bg-gray-700 dark:text-gray-200">No experience needed</span>
+                                </div>
+                                <p class="mt-3 text-gray-700 dark:text-gray-300">Looking for individuals to pack and sort products in our warehouse. Flexible shifts available.</p>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <button class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium">
+                                        View Details
+                                    </button>
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded-md text-sm transition">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            Load More Jobs
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Job Application Form (Hidden by default) -->
+            <div id="application-form" class="hidden bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-8">
+                <h3 class="text-xl font-semibold mb-6 text-blue-600 dark:text-blue-400">Job Application Form</h3>
+                
+                <form id="job-application" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+                            <input type="tel" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aadhaar Number</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Labour Card Number (if any)</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+                        <textarea class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Upload Aadhaar Card (Front)</label>
+                            <div class="document-upload-box rounded-md p-4 text-center cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload or drag and drop</p>
+                                <p class="text-xs text-gray-400 mt-1">PDF, JPG or PNG (max 5MB)</p>
+                                <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Upload Labour Card (if any)</label>
+                            <div class="document-upload-box rounded-md p-4 text-center cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload or drag and drop</p>
+                                <p class="text-xs text-gray-400 mt-1">PDF, JPG or PNG (max 5MB)</p>
+                                <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button type="button" id="send-otp" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition">
+                            Send OTP for Verification
+                        </button>
+                    </div>
+                    
+                    <div id="otp-section" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Enter OTP (sent to your mobile)</label>
+                        <div class="flex justify-center space-x-2">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <.latest type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Didn't receive OTP? <button type="button" class="text-blue-600 dark:text-blue-400 hover:underline">Resend</button></p>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-4 pt-4">
+                        <button type="button" id="cancel-application" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-md transition">
+                            Cancel
+                        </button>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition">
+                            Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Employer Tab Content -->
+        <div class="tab-content" id="employer">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-6 text-blue-600 dark:text-blue-400">Post a Job Opportunity</h2>
+                
+                <form id="employer-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company Name</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Contact Person</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                            <input type="email" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
+                            <input type="tel" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Job Title</label>
+                        <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Job Type</label>
+                            <select class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                                <option value="">Select Job Type</option>
+                                <option>Construction</option>
+                                <option>Agriculture</option>
+                                <option>Manufacturing</option>
+                                <option>Domestic Work</option>
+                                <option>Transportation</option>
+                                <option>Retail</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Work Duration</label>
+                            <select class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                                <option value="">Select Duration</option>
+                                <option>Daily Wage</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Long Term</option>
+                                <option>Project Based</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Number of Workers Needed</label>
+                            <input type="number" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Salary/Wage</label>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-400">₹</span>
+                                <input type="number" class="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-r-md bg-white dark:bg-gray-700" placeholder="Amount" required>
+                                <select class="ml-2 p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
+                                    <option>/day</option>
+                                    <option>/week</option>
+                                    <option>/month</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Location</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Job Description</label>
+                        <textarea class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" rows="4" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Requirements/Skills Needed</label>
+                        <textarea class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" rows="3" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Benefits Provided (if any)</label>
+                        <textarea class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company Registration Document</label>
+                            <div class="document-upload-box rounded-md p-4 text-center cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload or drag and drop</p>
+                                <p class="text-xs text-gray-400 mt-1">PDF, JPG or PNG (max 5MB)</p>
+                                <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Other Relevant Documents</label>
+                            <div class="document-upload-box rounded-md p-4 text-center cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload or drag and drop</p>
+                                <p class="text-xs text-gray-400 mt-1">PDF, JPG or PNG (max 5MB each)</p>
+                                <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button type="button" id="send-otp-employer" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition">
+                            Send OTP for Verification
+                        </button>
+                    </div>
+                    
+                    <div id="otp-section-employer" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Enter OTP (sent to your mobile)</label>
+                        <div class="flex justify-center space-x-2">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                            <input type="text" maxlength="1" class="otp-input border border-gray-300 dark:border-gray-600 rounded-md text-center">
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Didn't receive OTP? <button type="button" class="text-blue-600 dark:text-blue-400 hover:underline">Resend</button></p>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-4 pt-4">
+                        <button type="reset" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-md transition">
+                            Reset Form
+                        </button>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition">
+                            Post Job Opportunity
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Government Schemes Tab Content -->
+        <div class="tab-content" id="schemes">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-6 text-blue-600 dark:text-blue-400">Government Schemes for Workers</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Scheme Card 1 -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 hover:shadow-md transition">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-hand-holding-usd text-blue-600 dark:text-blue-300 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Pradhan Mantri Shram Yogi Maan-dhan (PMSYM)</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">Pension scheme for unorganized workers providing ₹3000/month after 60 years of age.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">Eligibility: 18-40 years</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full dark:bg-purple-900 dark:text-purple-200 ml-2">Contribution: ₹55-200/month</span>
+                                </div>
+                                <button class="mt-4 text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
+                                    Learn More & Apply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Scheme Card 2 -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 hover:shadow-md transition">
+                        <div class="flex items-start">
+                            <div class="bg-green-100 dark:bg-green-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-home text-green-600 dark:text-green-300 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Pradhan Mantri Awas Yojana (PMAY)</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">Housing for All scheme providing affordable housing to urban poor including construction workers.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200">EWS/LIG Category</span>
+                                    <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full dark:bg-yellow-900 dark:text-yellow-200 ml-2">Subsidy up to ₹2.67 lakh</span>
+                                </div>
+                                <button class="mt-4 text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
+                                    Learn More & Apply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Scheme Card 3 -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 hover:shadow-md transition">
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 dark:bg-yellow-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-graduation-cap text-yellow-600 dark:text-yellow-300 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Skill India Mission</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">Training programs to enhance skills of workers across various sectors with certification.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full dark:bg-purple-900 dark:text-purple-200">Free Training</span>
+                                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full dark:bg-red-900 dark:text-red-200 ml-2">Placement Assistance</span>
+                                </div>
+                                <button class="mt-4 text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
+                                    Learn More & Apply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Scheme Card 4 -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-5 hover:shadow-md transition">
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 dark:bg-purple-900 p-3 rounded-full mr-4">
+                                <i class="fas fa-heartbeat text-purple-600 dark:text-purple-300 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Ayushman Bharat - PMJAY</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">Health insurance scheme providing coverage of ₹5 lakh per family per year for secondary and tertiary care.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">10.74 crore families</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full dark:bg-blue-900 dark:text-blue-200 ml-2">Cashless Treatment</span>
+                                </div>
+                                <button class="mt-4 text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
+                                    Learn More & Apply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Explore More Schemes</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Discover additional government schemes tailored for workers across India.</p>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" placeholder="Search for schemes..." class="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

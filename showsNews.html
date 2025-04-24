@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabourSahayata - News & Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .category-chip {
+            transition: all 0.3s ease;
+        }
+        .category-chip:hover {
+            transform: scale(1.05);
+        }
+        #newsFilter {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 p-4 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex justify-between w-full md:w-auto items-center">
+                <a href="#" class="text-2xl font-bold hover:text-yellow-300">Labour Portal</a>
+                <button class="md:hidden text-2xl" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <ul class="hidden md:flex space-x-6 mt-4 md:mt-0" id="menu-items">
+                <li><a href="homepage.php" class="hover:underline hover:text-yellow-300">🏠Home</a></li>
+                <li><a href="policies.html" class="hover:underline hover:text-yellow-300">⚖Policies</a></li>
+                <li><a href="showsNews.html" class="hover:underline hover:text-yellow-300">📰News</a></li>
+                <li><a href="helpDashboard.html" class="hover:underline hover:text-yellow-300">☎Help Dashboard</a></li>
+                <li><a href="complaint.html" class="hover:underline hover:text-yellow-300">📝File a Complaint</a></li>
+
+            </ul>
+            <!-- <div class="hidden md:block mt-4 md:mt-0" id="auth-buttons">
+                <button class="bg-white text-blue-600 px-4 py-2 rounded-md mr-2 hover:bg-blue-100 transition"><a href="userLogin.html">User Login</a></button>
+                <button class="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100 transition"><a href="employerlogin.html">Admin Login</a></button>
+            </div> -->
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="gradient-bg text-white rounded-xl p-8 mb-8 shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Labour News & Updates</h1>
+            <p class="text-lg mb-6">Stay informed with the latest policies, wage changes, and worker rights updates</p>
+            <!-- <div class="flex flex-wrap gap-4">
+                <button class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50">
+                    <i class="fas fa-bell mr-2"></i>Get Notifications
+                </button>
+                <button class="bg-white/20 text-white px-6 py-2 rounded-lg font-semibold hover:bg-white/30">
+                    <i class="fas fa-envelope mr-2"></i>Subscribe
+                </button>
+            </div> -->
+        </div>
+
+        <!-- News Filter -->
+        <!-- <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-filter text-blue-500 mr-2"></i> Filter News
+            </h2>
+            <div class="flex flex-wrap gap-3" id="newsFilter">
+                <button class="category-chip bg-blue-100 text-blue-600 px-4 py-1 rounded-full text-sm font-medium">
+                    All News
+                </button>
+                <button class="category-chip bg-green-100 text-green-600 px-4 py-1 rounded-full text-sm font-medium">
+                    Wage Updates
+                </button>
+                <button class="category-chip bg-yellow-100 text-yellow-600 px-4 py-1 rounded-full text-sm font-medium">
+                    Policy Changes
+                </button>
+                <button class="category-chip bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm font-medium">
+                    Safety Alerts
+                </button>
+                <button class="category-chip bg-purple-100 text-purple-600 px-4 py-1 rounded-full text-sm font-medium">
+                    Court Rulings
+                </button>
+                <button class="category-chip bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-medium">
+                    Union News
+                </button>
+            </div>
+        </div> -->
+
+        <!-- Featured News -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center border-b pb-2">
+                <i class="fas fa-star text-yellow-500 mr-2"></i> Featured Updates
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Featured News 1 -->
+                <div class="news-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1581093450025-4d07acb6e6a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                             alt="Labour Policy Update" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 bg-blue-600 text-white px-3 py-1 text-sm font-medium">
+                            Policy Change
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">New Wage Code Implementation From April 2024</h3>
+                        <p class="text-gray-600 mb-4">The government has announced the implementation of new wage codes that will affect overtime calculations and take-home salaries across all sectors.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i> 15 March 2024
+                            </span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                Read More <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured News 2 -->
+                <div class="news-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1581093196277-1c8d47ab5b2b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                             alt="Construction Safety" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 bg-red-600 text-white px-3 py-1 text-sm font-medium">
+                            Safety Alert
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Revised Safety Norms for Construction Workers</h3>
+                        <p class="text-gray-600 mb-4">Labour ministry introduces stricter safety regulations for high-rise construction projects following recent accidents in Mumbai and Delhi.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">
+                                <i class="fas fa-calendar-alt mr-1"></i> 10 March 2024
+                            </span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                Read More <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily News Updates -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center border-b pb-2">
+                <i class="fas fa-newspaper text-blue-500 mr-2"></i> Daily Labour News
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- News Item 1 -->
+                <div class="news-card bg-white rounded-lg shadow-md p-6 transition duration-300">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-green-100 text-green-600 p-2 rounded-full mr-3">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500">Wage Update</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Minimum Wage Increased in 5 States</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Maharashtra, Gujarat, Tamil Nadu, Karnataka and Uttar Pradesh announce revised minimum wages effective 1st April.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i> 2 hours ago
+                        </span>
+                        <a href="https://www.livemint.com/news/india/minimum-wages-hiked-in-these-five-states-check-details-here-11671123456789.html" 
+                           target="_blank" class="text-blue-600 hover:text-blue-800 text-xs font-medium">
+                            Source: LiveMint
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- News Item 2 -->
+                <div class="news-card bg-white rounded-lg shadow-md p-6 transition duration-300">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-yellow-100 text-yellow-600 p-2 rounded-full mr-3">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500">Court Ruling</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Supreme Court Mandates Weekly Off for Gig Workers</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Landmark judgment requires all platform companies to provide at least one paid day off per week.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i> 5 hours ago
+                        </span>
+                        <a href="https://www.thehindu.com/news/national/sc-mandates-weekly-off-for-gig-workers/article678901234.html" 
+                           target="_blank" class="text-blue-600 hover:text-blue-800 text-xs font-medium">
+                            Source: The Hindu
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- News Item 3 -->
+                <div class="news-card bg-white rounded-lg shadow-md p-6 transition duration-300">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-purple-100 text-purple-600 p-2 rounded-full mr-3">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500">Union News</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Transport Workers Union Announces Nationwide Strike</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Strike planned for April 15th demanding better working conditions and revised pay scales.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i> 8 hours ago
+                        </span>
+                        <a href="https://www.business-standard.com/article/current-affairs/transport-workers-union-calls-nationwide-strike-on-april-15-12403123456789.html" 
+                           target="_blank" class="text-blue-600 hover:text-blue-800 text-xs font-medium">
+                            Source: Business Standard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Policy Updates -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center border-b pb-2">
+                <i class="fas fa-file-alt text-green-500 mr-2"></i> Policy Updates
+            </h2>
+            <div class="bg-blue-50 rounded-xl p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-left border-b">
+                                <th class="pb-2">Policy</th>
+                                <th class="pb-2">Effective Date</th>
+                                <th class="pb-2">Impact</th>
+                                <th class="pb-2">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-blue-100">
+                                <td class="py-3">EPF Contribution Changes</td>
+                                <td class="py-3">01 Apr 2024</td>
+                                <td class="py-3">All Employees</td>
+                                <td class="py-3">
+                                    <a href="https://www.financialexpress.com/money/epf-new-rules-2024-epfo-makes-these-5-major-changes-check-details-here-3412345/" 
+                                       target="_blank" class="text-blue-600 hover:underline">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-blue-100">
+                                <td class="py-3">Construction Safety Norms</td>
+                                <td class="py-3">15 Mar 2024</td>
+                                <td class="py-3">Construction Workers</td>
+                                <td class="py-3">
+                                    <a href="https://www.livemint.com/news/india/new-safety-norms-for-construction-workers-announced-11671234567890.html" 
+                                       target="_blank" class="text-blue-600 hover:underline">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-blue-100">
+                                <td class="py-3">Maternity Benefits Extension</td>
+                                <td class="py-3">01 Jun 2024</td>
+                                <td class="py-3">Women Workers</td>
+                                <td class="py-3">
+                                    <a href="https://www.thehindu.com/news/national/maternity-benefits-extended-to-contract-workers/article678901235.html" 
+                                       target="_blank" class="text-blue-600 hover:underline">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Sources Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center border-b pb-2">
+                <i class="fas fa-link text-purple-500 mr-2"></i> Trusted News Sources
+            </h2>
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="https://www.labour.gov.in/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6f/Government_of_India_logo.svg/1200px-Government_of_India_logo.svg.png" 
+                         alt="Ministry of Labour" class="h-12 mb-2">
+                    <p class="font-medium text-center">Ministry of Labour</p>
+                </a>
+                <a href="https://www.epfindia.gov.in/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center">
+                    <img src="https://www.epfindia.gov.in/images/EPFO_logo.png" 
+                         alt="EPFO" class="h-12 mb-2">
+                    <p class="font-medium text-center">EPFO</p>
+                </a>
+                <a href="https://www.thehindu.com/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center">
+                    <img src="https://www.thehindu.com/theme/images/th-online/logo.png" 
+                         alt="The Hindu" class="h-12 mb-2">
+                    <p class="font-medium text-center">The Hindu</p>
+                </a>
+                <a href="https://www.livemint.com/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center">
+                    <img src="https://www.livemint.com/lm-img/static/logo.svg" 
+                         alt="LiveMint" class="h-12 mb-2">
+                    <p class="font-medium text-center">LiveMint</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Subscribe Section -->
+        <div class="bg-blue-50 rounded-xl p-8 text-center">
+            <h2 class="text-2xl font-bold mb-2">Get Daily Updates</h2>
+            <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Subscribe to our newsletter and receive the latest labour news and policy updates directly in your inbox</p>
+            <div class="flex max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-grow p-3 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-r-lg font-semibold hover:bg-blue-700">
+                    Subscribe
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-3">We'll never share your email with anyone else</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-6">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">LabourSahayata</h3>
+                    <p class="text-gray-400">Your comprehensive portal for labour rights, news and resources.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
+                        <li><a href="laws.html" class="text-gray-400 hover:text-white">Labour Laws</a></li>
+                        <li><a href="complaints.html" class="text-gray-400 hover:text-white">File Complaint</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">1800-123-456</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">contact@laboursahayata.gov.in</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">New Delhi, India</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+                <p>© 2025 LabourSahayata Portal. All rights reserved.</p>
+                <p class="mt-1">Content is sourced from official government websites and trusted news sources</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+            this.innerHTML = document.getElementById('mobileMenu').classList.contains('hidden') ? 
+                '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        });
+
+        // News Filter Functionality
+        const filterButtons = document.querySelectorAll('#newsFilter button');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add(btn.classList.contains('bg-blue-100') ? 'bg-blue-100' : 
+                                      btn.classList.contains('bg-green-100') ? 'bg-green-100' :
+                                      btn.classList.contains('bg-yellow-100') ? 'bg-yellow-100' :
+                                      btn.classList.contains('bg-red-100') ? 'bg-red-100' :
+                                      btn.classList.contains('bg-purple-100') ? 'bg-purple-100' :
+                                      btn.classList.contains('bg-indigo-100') ? 'bg-indigo-100' : '');
+                    btn.classList.add(btn.classList.contains('text-blue-600') ? 'text-blue-600' : 
+                                      btn.classList.contains('text-green-600') ? 'text-green-600' :
+                                      btn.classList.contains('text-yellow-600') ? 'text-yellow-600' :
+                                      btn.classList.contains('text-red-600') ? 'text-red-600' :
+                                      btn.classList.contains('text-purple-600') ? 'text-purple-600' :
+                                      btn.classList.contains('text-indigo-600') ? 'text-indigo-600' : '');
+                });
+                
+                // Add active class to clicked button
+                this.classList.remove('bg-blue-100', 'bg-green-100', 'bg-yellow-100', 'bg-red-100', 'bg-purple-100', 'bg-indigo-100');
+                this.classList.remove('text-blue-600', 'text-green-600', 'text-yellow-600', 'text-red-600', 'text-purple-600', 'text-indigo-600');
+                this.classList.add('bg-blue-600', 'text-white');
+                
+                // In a real implementation, you would filter news items her
+            });
+        });
+
+        // Set first filter button as active by default
+        filterButtons[0].classList.add('bg-blue-600', 'text-white');
+        filterButtons[0].classList.remove('bg-blue-100', 'text-blue-600');
+    </script>
+</body>
+</html>

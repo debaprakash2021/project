@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labour Portal - Employer Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #3b82f6, #6366f1, #8b5cf6, #d946ef);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .login-card {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 46, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .floating-label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .input-field:focus + .floating-label,
+        .input-field:not(:placeholder-shown) + .floating-label {
+            top: 0;
+            left: 10px;
+            font-size: 12px;
+            background: rgba(59, 130, 246, 0.8);
+            padding: 0 5px;
+            border-radius: 4px;
+            color: white;
+        }
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            margin: 0 5px;
+        }
+        #otpSection, #loginForm {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center gradient-bg p-4">
+    <div class="login-card w-full max-w-md p-8 text-white">
+        <!-- Logo and Header -->
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-building text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">Employer Login</h1>
+            <p class="opacity-80">Access your employer dashboard</p>
+        </div>
+
+        <!-- Login Form (Initially Visible) -->
+        <form id="loginForm" class="space-y-6" action="admin.php" method="post">
+            <!-- Email -->
+            <div class="relative">
+                <input type="email" id="email" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " name="email">
+                <label for="email" class="floating-label">Registered Email</label>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-blue-200"></i>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="relative">
+                <input type="password" id="password" name="password" class="input-field w-full pl-4 pr-10 py-3 rounded-lg focus:outline-none" placeholder=" " required>
+                <label for="password" class="floating-label">Password</label>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+                    <i class="fas fa-eye-slash text-blue-200" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="remember-me" class="ml-2 block text-sm">Remember me</label>
+                </div>
+                <div class="text-sm">
+                    <a href="#" class="font-medium text-blue-200 hover:text-blue-100">Forgot password?</a>
+                </div>
+            </div>
+            <div>
+                <button type="submit" id="requestOtpBtn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105" name="logIn">
+                    Log in
+                </button>
+            </div>
+        </form>
+        <script>
+            // Toggle Password Visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+        
+            togglePassword.addEventListener('click', function() {
+                // Toggle the eye/eye-slash icon
+                this.classList.toggle('fa-eye-slash');
+                this.classList.toggle('fa-eye');
+                
+                // Toggle the password field type
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                
+                // Focus back on the password field
+                password.focus();
+            });
+        
+            // Optional: Hide password when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#togglePassword') && !e.target.closest('#password')) {
+                    password.setAttribute('type', 'password');
+                    togglePassword.classList.add('fa-eye-slash');
+                    togglePassword.classList.remove('fa-eye');
+                }
+            });
+        </script>
+</body>
+</html>

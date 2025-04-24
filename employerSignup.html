@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labour Portal - Employer Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #3b82f6, #6366f1, #8b5cf6, #d946ef);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .signup-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .floating-label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .input-field:focus + .floating-label,
+        .input-field:not(:placeholder-shown) + .floating-label {
+            top: 0;
+            left: 10px;
+            font-size: 12px;
+            background: rgba(59, 130, 246, 0.8);
+            padding: 0 5px;
+            border-radius: 4px;
+            color: white;
+        }
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            margin: 0 5px;
+        }
+        .progress-bar {
+            height: 4px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center gradient-bg p-4">
+    <div class="signup-card w-full max-w-2xl p-8 text-white">
+        <!-- Logo and Header -->
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-building text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">Employer Registration</h1>
+            <p class="opacity-80">Create your employer account in just 2 minutes</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-1.5 mb-6">
+            <div class="progress-bar bg-blue-600 h-1.5 rounded-full" style="width: 0%" id="progressBar"></div>
+        </div>
+
+        <!-- Multi-Step Form -->
+        <form id="employerSignupForm" class="space-y-6">
+            <!-- Step 1: Basic Details -->
+            <div id="step1" class="form-step">
+                <h2 class="text-xl font-bold mb-4 text-blue-200">Step 1: Basic Information</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- Full Name -->
+                    <div class="relative">
+                        <input type="text" id="fullName" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " required>
+                        <label for="fullName" class="floating-label">Full Name</label>
+                    </div>
+
+                    <!-- Company Name -->
+                    <div class="relative">
+                        <input type="text" id="companyName" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " required>
+                        <label for="companyName" class="floating-label">Company Name</label>
+                    </div>
+                </div>
+
+                <!-- Auto-generated Employer ID -->
+                <div class="relative mt-4">
+                    <input type="text" id="employerId" class="input-field w-full pl-4 pr-3 py-3 rounded-lg bg-gray-700 cursor-not-allowed" placeholder=" " readonly>
+                    <label for="employerId" class="floating-label">Employer ID (Auto-generated)</label>
+                    <button type="button" id="generateIdBtn" class="absolute right-2 top-2 text-blue-300 hover:text-blue-100">
+                        <i class="fas fa-sync-alt"></i> Regenerate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Verification Details -->
+            <div id="step2" class="form-step hidden">
+                <h2 class="text-xl font-bold mb-4 text-blue-200">Step 2: Verification</h2>
+                
+                <!-- Aadhaar Number -->
+                <div class="relative mb-4">
+                    <input type="text" id="aadhaarNumber" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " maxlength="12" pattern="[0-9]{12}" required>
+                    <label for="aadhaarNumber" class="floating-label">Aadhaar Number</label>
+                    <button type="button" id="verifyAadhaarBtn" class="absolute right-2 top-2 text-blue-300 hover:text-blue-100">
+                        <i class="fas fa-check-circle"></i> Verify
+                    </button>
+                </div>
+
+                <!-- GSTIN -->
+                <div class="relative mb-4">
+                    <input type="text" id="gstin" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " pattern="[0-9A-Za-z]{15}" required>
+                    <label for="gstin" class="floating-label">GSTIN (15 characters)</label>
+                    <button type="button" id="verifyGstinBtn" class="absolute right-2 top-2 text-blue-300 hover:text-blue-100">
+                        <i class="fas fa-check-circle"></i> Verify
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Contact Details -->
+            <div id="step3" class="form-step hidden">
+                <h2 class="text-xl font-bold mb-4 text-blue-200">Step 3: Contact Information</h2>
+                
+                <!-- Email -->
+                <div class="relative mb-4">
+                    <input type="email" id="email" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " required>
+                    <label for="email" class="floating-label">Official Email</label>
+                    <button type="button" id="sendEmailOtpBtn" class="absolute right-2 top-2 text-blue-300 hover:text-blue-100">
+                        <i class="fas fa-paper-plane"></i> Send OTP
+                    </button>
+                </div>
+
+                <!-- Email OTP -->
+                <div id="emailOtpSection" class="hidden mb-4">
+                    <div class="flex justify-center">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                    </div>
+                    <p class="text-center text-xs mt-2">Enter 6-digit OTP sent to your email</p>
+                </div>
+
+                <!-- Mobile -->
+                <div class="relative">
+                    <input type="tel" id="mobile" class="input-field w-full pl-4 pr-3 py-3 rounded-lg focus:outline-none" placeholder=" " pattern="[0-9]{10}" required>
+                    <label for="mobile" class="floating-label">Mobile Number</label>
+                    <button type="button" id="sendMobileOtpBtn" class="absolute right-2 top-2 text-blue-300 hover:text-blue-100">
+                        <i class="fas fa-paper-plane"></i> Send OTP
+                    </button>
+                </div>
+
+                <!-- Mobile OTP -->
+                <div id="mobileOtpSection" class="hidden mt-4">
+                    <div class="flex justify-center">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                        <input type="text" maxlength="1" class="otp-input input-field rounded-lg" pattern="\d">
+                    </div>
+                    <p class="text-center text-xs mt-2">Enter 6-digit OTP sent to your mobile</p>
+                </div>
+            </div>
+
+            <!-- Step 4: Final Step -->
+            <div id="step4" class="form-step hidden">
+                <h2 class="text-xl font-bold mb-4 text-blue-200">Step 4: Complete Registration</h2>
+                
+                <div class="bg-blue-900/30 p-4 rounded-lg mb-4">
+                    <h3 class="font-bold mb-2">Review Your Details:</h3>
+                    <div id="reviewDetails" class="text-sm space-y-1"></div>
+                </div>
+
+                <!-- Terms & Conditions -->
+                <div class="flex items-start">
+                    <input type="checkbox" id="terms" class="h-4 w-4 mt-1 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                    <label for="terms" class="ml-2 block text-sm">
+                        I agree to the <a href="#" class="text-blue-200 hover:underline">Terms & Conditions</a> and <a href="#" class="text-blue-200 hover:underline">Privacy Policy</a>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between pt-4">
+                <button type="button" id="prevBtn" class="hidden px-4 py-2 rounded-lg text-white bg-gray-600 hover:bg-gray-700">
+                    <i class="fas fa-arrow-left mr-2"></i>Previous
+                </button>
+                <button type="button" id="nextBtn" class="ml-auto px-6 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700">
+                    Next<i class="fas fa-arrow-right ml-2"></i>
+                </button>
+                <button type="submit" id="submitBtn" class="hidden px-6 py-2 rounded-lg text-white bg-green-600 hover:bg-green-700">
+                    <i class="fas fa-check-circle mr-2"></i>Submit
+                </button>
+            </div>
+        </form>
+
+        <!-- Already have an account? -->
+        <div class="mt-8 text-center text-sm">
+            <p class="text-white/80">Already registered? <a href="employerlogin.html" class="font-medium text-blue-200 hover:text-blue-100">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Generate random employer ID
+        function generateEmployerId() {
+            const prefix = "EMP";
+            const randomNum = Math.floor(10000 + Math.random() * 90000);
+            return prefix + randomNum;
+        }
+
+        // Initialize employer ID
+        document.getElementById('employerId').value = generateEmployerId();
+
+        // Regenerate ID button
+        document.getElementById('generateIdBtn').addEventListener('click', function() {
+            document.getElementById('employerId').value = generateEmployerId();
+        });
+
+        // Multi-step form navigation
+        let currentStep = 1;
+        const totalSteps = 4;
+        const progressBar = document.getElementById('progressBar');
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(div => {
+                div.classList.add('hidden');
+            });
+            document.getElementById(`step${step}`).classList.remove('hidden');
+
+            // Update button visibility
+            document.getElementById('prevBtn').classList.toggle('hidden', step === 1);
+            document.getElementById('nextBtn').classList.toggle('hidden', step === totalSteps);
+            document.getElementById('submitBtn').classList.toggle('hidden', step !== totalSteps);
+
+            // Update progress bar
+            updateProgress();
+        }
+
+        // Next button
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            // Validate current step before proceeding
+            let isValid = true;
+            
+            if (currentStep === 1) {
+                if (!document.getElementById('fullName').value || !document.getElementById('companyName').value) {
+                    isValid = false;
+                    alert("Please fill all required fields");
+                }
+            }
+            else if (currentStep === 2) {
+                if (!document.getElementById('aadhaarNumber').checkValidity()) {
+                    isValid = false;
+                    alert("Please enter a valid 12-digit Aadhaar number");
+                }
+                if (!document.getElementById('gstin').checkValidity()) {
+                    isValid = false;
+                    alert("Please enter a valid 15-character GSTIN");
+                }
+            }
+            else if (currentStep === 3) {
+                // Check if email and mobile OTPs are verified
+                if (!emailVerified || !mobileVerified) {
+                    isValid = false;
+                    alert("Please verify both email and mobile with OTP");
+                }
+            }
+
+            if (isValid && currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+
+                // On last step, show review details
+                if (currentStep === totalSteps) {
+                    const reviewDiv = document.getElementById('reviewDetails');
+                    reviewDiv.innerHTML = `
+                        <p><strong>Name:</strong> ${document.getElementById('fullName').value}</p>
+                        <p><strong>Company:</strong> ${document.getElementById('companyName').value}</p>
+                        <p><strong>Employer ID:</strong> ${document.getElementById('employerId').value}</p>
+                        <p><strong>Aadhaar:</strong> ${document.getElementById('aadhaarNumber').value}</p>
+                        <p><strong>GSTIN:</strong> ${document.getElementById('gstin').value}</p>
+                        <p><strong>Email:</strong> ${document.getElementById('email').value}</p>
+                        <p><strong>Mobile:</strong> ${document.getElementById('mobile').value}</p>
+                    `;
+                }
+            }
+        });
+
+        // Previous button
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // OTP Verification Logic
+        let emailVerified = false;
+        let mobileVerified = false;
+
+        // Email OTP
+        document.getElementById('sendEmailOtpBtn').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            if (!email.includes('@') || !email.includes('.')) {
+                alert("Please enter a valid email address");
+                return;
+            }
+            
+            // Simulate sending OTP
+            document.getElementById('emailOtpSection').classList.remove('hidden');
+            console.log("OTP sent to email:", email);
+            alert("OTP has been sent to your email");
+        });
+
+        // Mobile OTP
+        document.getElementById('sendMobileOtpBtn').addEventListener('click', function() {
+            const mobile = document.getElementById('mobile').value;
+            if (mobile.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number");
+                return;
+            }
+            
+            // Simulate sending OTP
+            document.getElementById('mobileOtpSection').classList.remove('hidden');
+            console.log("OTP sent to mobile:", mobile);
+            alert("OTP has been sent to your mobile");
+        });
+
+        // Auto-focus next OTP input
+        document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', function() {
+                if (this.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+                
+                // Auto-verify if all digits entered
+                if (index === inputs.length - 1 && this.value.length === 1) {
+                    const otp = Array.from(inputs).map(i => i.value).join('');
+                    if (otp.length === 6) {
+                        // In real app, verify with server
+                        if (inputs[0].closest('#emailOtpSection')) {
+                            emailVerified = true;
+                            alert("Email verified successfully!");
+                        } else {
+                            mobileVerified = true;
+                            alert("Mobile verified successfully!");
+                        }
+                    }
+                }
+            });
+            
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('employerSignupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('terms').checked) {
+                alert("Please accept the Terms & Conditions");
+                return;
+            }
+            
+            // Simulate form submission
+            alert("Registration successful! Redirecting to dashboard...");
+            
+            // In real app, submit to server and redirect
+            setTimeout(() => {
+                window.location.href = "employer-dashboard.html";
+            }, 1500);
+        });
+
+        // Initialize first step
+        showStep(1);
+    </script>
+</body>
+</html>
